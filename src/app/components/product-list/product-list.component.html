@@ -1,22 +1,28 @@
-<div class="container mt-2">
-  <!-- <mat-grid-list cols="4"> -->
-    <div class="row">
+<div class="container mt-3">
+  <div class="search-wrapper mb-2">
+    <div class="input-group search-container">
+      <input type="text" [(ngModel)]="searchText" placeholder="Search..." class="form-control" />
+      <button (click)="onSearch($event)" class="btn btn-primary">
+        <mat-icon>search</mat-icon>
+      </button>
+    </div>
+  </div>
+  <div class="row">
     @for(product of products; track $index) {
-        <!-- <mat-grid-tile > -->
-            <div class="col-sm-12 col-md-6 col-lg-3 mt-2">
-              <mat-card appearance="outlined" class= "product-card">
-                <mat-card-header>
-                  <mat-card-title> {{product.model}}</mat-card-title>
-                  <mat-card-subtitle>{{product.brand}}</mat-card-subtitle>
-                </mat-card-header>
-                <img class="image-card" mat-card-image src="{{product.imgUrl}}" alt="Phone {{product.model}}">
-                <mat-card-content>
-                  <p>
-                    {{product.price | currency: 'EUR'}}
-                  </p>
-                </mat-card-content>
-              </mat-card>
-            </div>
-        }
+      <div class="col-sm-12 col-md-6 col-lg-3 mt-2">
+        <mat-card appearance="outlined" class= "product-card">
+          <mat-card-header>
+            <mat-card-title> {{product.model}}</mat-card-title>
+            <mat-card-subtitle>{{product.brand}}</mat-card-subtitle>
+          </mat-card-header>
+          <img class="image-card" mat-card-image src="{{product.imgUrl}}" alt="Phone {{product.model}}">
+          <mat-card-content>
+            <p>
+              {{product.price | currency: 'EUR'}}
+            </p>
+          </mat-card-content>
+        </mat-card>
       </div>
+    }
+  </div>
 </div>

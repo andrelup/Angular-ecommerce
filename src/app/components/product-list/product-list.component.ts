@@ -1,22 +1,25 @@
 import { Component } from '@angular/core';
-import { CurrencyPipe } from '@angular/common';
+import { CommonModule, CurrencyPipe } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import {MatGridListModule} from '@angular/material/grid-list';
+import { MatIconModule } from '@angular/material/icon';
 
 import { ProductService } from '../../services/product.service';
 import { Product } from '../../models/product';
 
 import { MatCardModule } from '@angular/material/card';
 
+
 @Component({
   selector: 'app-product-list',
-  imports: [MatGridListModule, MatCardModule, CurrencyPipe],
+  imports: [CommonModule, FormsModule, MatGridListModule, MatCardModule, MatIconModule, CurrencyPipe],
   providers: [ProductService],
   templateUrl: './product-list.component.html',
   styleUrl: './product-list.component.scss'
 })
 export class ProductListComponent {
 
-
+  searchText: string = '';
   products: Product[]= [];
   // products: Product[] = [
   //   {
@@ -97,5 +100,9 @@ export class ProductListComponent {
       console.log(data);
       this.products = data;
     });
+  }
+  onSearch(event: any) {
+    this.searchText = event.target.value;
+    console.log(this.searchText);
   }
 }
