@@ -12,7 +12,7 @@
                 <img class="image-card" mat-card-image src="{{product.imgUrl}}" alt="Phone {{product.model}}">
                 <mat-card-content>
                   <p>
-                    {{product.price | currency}}
+                    {{product.price | currency: 'EUR'}}
                   </p>
                 </mat-card-content>
               </mat-card>
