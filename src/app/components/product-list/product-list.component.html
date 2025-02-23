@@ -8,21 +8,27 @@
     </div>
   </div>
   <div class="row">
-    @for(product of products; track $index) {
-      <div class="col-sm-12 col-md-6 col-lg-3 mt-2">
-        <mat-card appearance="outlined" class= "product-card" (click)="detailClick(product)">
-          <mat-card-header>
-            <mat-card-title> {{product.model}}</mat-card-title>
-            <mat-card-subtitle>{{product.brand}}</mat-card-subtitle>
-          </mat-card-header>
-          <img class="image-card" mat-card-image src="{{product.imgUrl}}" alt="Phone {{product.model}}">
-          <mat-card-content>
-            <p>
-              {{product.price | currency: 'EUR'}}
-            </p>
-          </mat-card-content>
-        </mat-card>
-      </div>
-    }
+    <ng-container *ngIf="(products$ | async) as products; else loading">
+      <ng-container *ngFor="let product of products; ">
+        <div class="col-sm-12 col-md-6 col-lg-3 mt-2">
+          <mat-card appearance="outlined" class= "product-card" (click)="detailClick(product)">
+            <mat-card-header>
+              <mat-card-title> {{product.model}}</mat-card-title>
+              <mat-card-subtitle>{{product.brand}}</mat-card-subtitle>
+            </mat-card-header>
+            <img class="image-card" mat-card-image src="{{product.imgUrl}}" alt="Phone {{product.model}}">
+            <mat-card-content>
+              <p>
+                {{product.price | currency: 'EUR'}}
+              </p>
+            </mat-card-content>
+          </mat-card>
+        </div>
+      </ng-container>
+    </ng-container>
+
+    <ng-template #loading>
+      <p>Cargando productos...</p>
+    </ng-template>
   </div>
 </div>

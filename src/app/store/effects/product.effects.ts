@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { ProductService } from '../../services/product.service';
-import { loadProducts, loadProductsSuccess, clearCache } from '../actions/product.actions';
+import { loadProducts, loadProductsSuccess } from '../actions/product.actions';
 import { map, mergeMap, withLatestFrom } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 import { ProductState } from '../reducers/product.reducer';
@@ -10,11 +10,9 @@ import { of } from 'rxjs';
 
 @Injectable()
 export class ProductEffects {
-  constructor(
-    private actions$: Actions,
-    private productService: ProductService,
-    private store: Store<ProductState>
-  ) {}
+  private actions$ = inject(Actions); // ✅ Inyección sin constructor
+  private productService = inject(ProductService); // ✅ Asegurar la inyección del servicio
+  private store = inject(Store<ProductState>);
 
   loadProducts$ = createEffect(() =>
     this.actions$.pipe(
@@ -30,6 +28,12 @@ export class ProductEffects {
           return of(loadProductsSuccess({ products: cachedProducts }));
         }
 
+        // ⚠️ VERIFICACIÓN: ¿Está devolviendo un Observable?
+        if (!this.productService || !this.productService.getProducts) {
+          console.error('ProductService no está disponible o getProducts() es undefined');
+          return of(loadProductsSuccess({ products: [] })); // Evitar el error
+        }
+
         // Si no hay caché válida, hacer petición a la API
         return this.productService.getProducts().pipe(
           map((products) => {
@@ -41,13 +45,7 @@ export class ProductEffects {
     )
   );
 
-  clearCache$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(clearCache),
-      map(() => {
-        localStorage.removeItem('cachedProducts');
-        return { type: '[Product] Cache Cleared' };
-      })
-    )
-  );
+  constructor() {
+    console.log('ProductEffects inicializado'); // Verificar si el efecto se está creando
+  }
 }
