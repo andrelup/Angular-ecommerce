@@ -101,8 +101,7 @@ export class ProductListComponent {
       this.products = data;
     });
   }
-  onSearch(event: any) {
-    this.searchText = event.target.value;
+  onSearch() {
     console.log(this.searchText);
   }
 }

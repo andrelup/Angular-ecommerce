@@ -1,8 +1,8 @@
 <div class="container mt-3">
   <div class="search-wrapper mb-2">
     <div class="input-group search-container">
-      <input type="text" [(ngModel)]="searchText" placeholder="Search..." class="form-control" />
-      <button (click)="onSearch($event)" class="btn btn-primary">
+      <input type="text" [(ngModel)]="searchText" placeholder="Search..." class="form-control" (keyup.enter)="onSearch()" />
+      <button (click)="onSearch()" class="btn btn-primary">
         <mat-icon>search</mat-icon>
       </button>
     </div>
