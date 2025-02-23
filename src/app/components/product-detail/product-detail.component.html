@@ -1,3 +1,7 @@
+<!-- Botón de volver -->
+<button mat-fab color="secondary" class="back-button" (click)="goBack()">
+  <mat-icon>arrow_back</mat-icon>
+</button>
 <!-- product-detail.component.html -->
 <div class="product-detail-container">
   <!-- Sección de detalles del producto -->
@@ -24,15 +28,18 @@
     <div class="product-actions">
       <label for="color">Color:</label>
       <select id="color" [(ngModel)]="selectedColor">
-        <option *ngFor="let color of colorsOptions" [value]="color">{{ color }}</option>
+        <option *ngFor="let color of colorsOptions" [value]="color.code">{{ color.name }}</option>
       </select>
 
       <label for="storage">Almacenamiento:</label>
       <select id="storage" [(ngModel)]="selectedStorage">
-        <option *ngFor="let storage of storageOptions" [value]="storage">{{ storage }}</option>
+        <option *ngFor="let storage of storageOptions" [value]="storage.code">{{ storage.name }}</option>
       </select>
-
-      <button class="add-to-cart" (click)="addToCart()">Añadir a la cesta</button>
+      <button mat-flat-button color="primary">
+        <mat-icon>shopping_cart</mat-icon>
+        Añadir a la cesta
+      </button>
+      <!-- <button class="add-to-cart" (click)="addToCart()">Añadir a la cesta</button> -->
     </div>
   }
 </div>
