@@ -35,11 +35,10 @@
       <select id="storage" [(ngModel)]="selectedStorage">
         <option *ngFor="let storage of storageOptions" [value]="storage.code">{{ storage.name }}</option>
       </select>
-      <button mat-flat-button color="primary">
+      <button mat-flat-button color="primary" [disabled]="!selectedColor || !selectedStorage" (click)="addToCart()">
         <mat-icon>shopping_cart</mat-icon>
         Añadir a la cesta
       </button>
-      <!-- <button class="add-to-cart" (click)="addToCart()">Añadir a la cesta</button> -->
     </div>
   }
 </div>
