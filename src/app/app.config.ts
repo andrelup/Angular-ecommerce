@@ -1,5 +1,5 @@
 import { Config } from './../../node_modules/cosmiconfig/dist/types.d';
-import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
+import { ApplicationConfig, importProvidersFrom, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { provideStore } from '@ngrx/store';
 import { provideEffects } from '@ngrx/effects';
@@ -7,6 +7,7 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { provideHttpClient } from '@angular/common/http';
 
 import { MatPaginatorIntl } from '@angular/material/paginator';
+import { MatChipsModule } from '@angular/material/chips';
 
 import { routes } from './app.routes';
 import { ProductEffects } from './store/effects/product.effects';
@@ -21,6 +22,7 @@ export const appConfig: ApplicationConfig = {
     provideAnimationsAsync(),
     provideStore({ products: productReducer }),
     provideEffects([ProductEffects]),
+    importProvidersFrom(MatChipsModule),
     { provide: MatPaginatorIntl, useClass: CustomPaginatorIntl }
   ]
 };

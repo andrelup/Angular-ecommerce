@@ -31,3 +31,23 @@
   font-size: 12px;
   font-weight: bold;
 }
+.navbar-breadcrumbs {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.breadcrumb {
+  background: none;
+  padding: 0.5rem;
+  margin: 0;
+  list-style: none;
+  display: flex;
+  align-items: center;
+}
+
+.breadcrumb-item + .breadcrumb-item::before {
+  content: '›';
+  padding: 0 5px;
+  color: #ffffff;
+}

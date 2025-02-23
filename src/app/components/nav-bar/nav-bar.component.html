@@ -1,6 +1,13 @@
 <mat-toolbar color="primary">
-  <img src="logo.svg" height="50px" alt="Logo">
-  <h1 class="ms-3">Phone Market</h1>
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="/"><img src="logo.svg" height="50px" alt="Logo"></a></li>
+      @if(onDetailPage) {
+        <li class="breadcrumb-item active" aria-current="page">Detalles</li>
+      }
+    </ol>
+  </nav>
+
   <span class="flex-spacer"></span>
   <div class="cart-icon">
       <mat-icon >shopping_cart</mat-icon>
