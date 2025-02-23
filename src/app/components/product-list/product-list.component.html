@@ -1,17 +1,22 @@
-<mat-grid-list cols="4">
-  @for(product of products; track $index) {
-    <mat-grid-tile>
-      {{product.model}}
-      <!-- <app-product-card [product]="product"></app-product-card> -->
-    </mat-grid-tile>
-  }
-  <!-- <mat-grid-tile>1</mat-grid-tile>
-  <mat-grid-tile>2</mat-grid-tile>
-  <mat-grid-tile>3</mat-grid-tile>
-  <mat-grid-tile>4</mat-grid-tile>
-  <mat-grid-tile>5</mat-grid-tile>
-  <mat-grid-tile>6</mat-grid-tile>
-  <mat-grid-tile>7</mat-grid-tile>
-  <mat-grid-tile>8</mat-grid-tile>
-  <mat-grid-tile>9</mat-grid-tile> -->
-</mat-grid-list>
+<div class="container mt-2">
+  <!-- <mat-grid-list cols="4"> -->
+    <div class="row">
+    @for(product of products; track $index) {
+        <!-- <mat-grid-tile > -->
+            <div class="col-sm-12 col-md-6 col-lg-3 mt-2">
+              <mat-card appearance="outlined" class= "product-card">
+                <mat-card-header>
+                  <mat-card-title> {{product.model}}</mat-card-title>
+                  <mat-card-subtitle>{{product.brand}}</mat-card-subtitle>
+                </mat-card-header>
+                <img class="image-card" mat-card-image src="{{product.imgUrl}}" alt="Phone {{product.model}}">
+                <mat-card-content>
+                  <p>
+                    {{product.price | currency}}
+                  </p>
+                </mat-card-content>
+              </mat-card>
+            </div>
+        }
+      </div>
+</div>
