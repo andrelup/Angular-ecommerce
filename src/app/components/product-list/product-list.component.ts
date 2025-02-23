@@ -14,7 +14,7 @@ import { Product } from '../../models/product';
 
 @Component({
   selector: 'app-product-list',
-  imports: [CommonModule, FormsModule, MatGridListModule, MatCardModule, MatIconModule, CurrencyPipe],
+  imports: [CommonModule, FormsModule,CurrencyPipe, MatGridListModule, MatCardModule, MatIconModule],
   providers: [ProductService],
   templateUrl: './product-list.component.html',
   styleUrl: './product-list.component.scss'

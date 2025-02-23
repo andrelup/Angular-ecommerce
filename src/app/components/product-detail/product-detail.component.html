@@ -1,1 +1,38 @@
-<p>product-detail works!</p>
+<!-- product-detail.component.html -->
+<div class="product-detail-container">
+  <!-- Sección de detalles del producto -->
+  @if(product) {
+    <div class="product-info">
+      <img [src]="product.imgUrl" alt="{{ product.model }}" class="product-image" />
+      <h2>{{ product.model }}</h2>
+      <h3>{{ product.brand }}</h3>
+      <p class="price">{{ product.price | currency: 'EUR' }}</p>
+      <ul class="specs">
+        <li><strong>CPU:</strong> {{ product.cpu }}</li>
+        <li><strong>RAM:</strong> {{ product.ram }}</li>
+        <li><strong>Sistema Operativo:</strong> {{ product.os }}</li>
+        <li><strong>Resolución de pantalla:</strong> {{ product.displayResolution }}</li>
+        <li><strong>Batería:</strong> {{ product.battery }}</li>
+        <li><strong>Cámara Trasera:</strong> {{ primaryCamera }}</li>
+        <li><strong>Cámara Frontal:</strong> {{ product.secondaryCmera }}</li>
+        <li><strong>Dimensiones:</strong> {{ product.dimentions }}</li>
+        <li><strong>Peso:</strong> {{ product.weight }} g</li>
+      </ul>
+    </div>
+
+    <!-- Sección de acciones del producto -->
+    <div class="product-actions">
+      <label for="color">Color:</label>
+      <select id="color" [(ngModel)]="selectedColor">
+        <option *ngFor="let color of colorsOptions" [value]="color">{{ color }}</option>
+      </select>
+
+      <label for="storage">Almacenamiento:</label>
+      <select id="storage" [(ngModel)]="selectedStorage">
+        <option *ngFor="let storage of storageOptions" [value]="storage">{{ storage }}</option>
+      </select>
+
+      <button class="add-to-cart" (click)="addToCart()">Añadir a la cesta</button>
+    </div>
+  }
+</div>

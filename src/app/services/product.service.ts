@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Product } from '../models/product';
+import { ProductDetail } from '../models/product-detail';
 // import { Product } from '../interfaces/product';
 
 @Injectable({
@@ -19,9 +20,9 @@ export class ProductService {
         const urlProducts = new URL(this.URI+'/api/product');
         return this.http.get<Product[]>(urlProducts.toString());
     }
-    getProduct(id: string): Observable<Product> {
+    getProduct(id: string): Observable<ProductDetail> {
         const urlProduct = new URL(this.URI+'/api/product/'+id);
-        return this.http.get<Product>(urlProduct.toString());
+        return this.http.get<ProductDetail>(urlProduct.toString());
     }
     addToCart(product: any): Observable<any> {
         const urlAddToCart = new URL(this.URI+'/api/cart');
