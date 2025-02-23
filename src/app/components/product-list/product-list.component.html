@@ -1,40 +1,45 @@
 <div class="container mt-3">
-  <div class="search-wrapper mb-2">
-    <div class="input-group search-container">
-      <input type="text" [(ngModel)]="searchText" placeholder="Search..." class="form-control" (keyup.enter)="onSearch()" />
-      <button (click)="onSearch()" class="btn btn-primary">
-        <mat-icon>search</mat-icon>
-      </button>
+  @if (isLoading) {
+    <div class="loading-container">
+      <mat-spinner></mat-spinner>
     </div>
-  </div>
-  <div class="row">
-    <ng-container *ngIf="(products$ | async) as products; else loading">
-      <ng-container *ngFor="let product of products.slice((currentPage - 1) * pageSize, currentPage * pageSize)">
-        <div class="col-sm-12 col-md-6 col-lg-3 mt-2">
-          <mat-card appearance="outlined" class= "product-card" (click)="detailClick(product)">
-            <mat-card-header>
-              <mat-card-title> {{product.model}}</mat-card-title>
-              <mat-card-subtitle>{{product.brand}}</mat-card-subtitle>
-            </mat-card-header>
-            <img class="image-card" mat-card-image src="{{product.imgUrl}}" alt="Phone {{product.model}}">
-            <mat-card-content>
-              <p>
-                {{product.price | currency: 'EUR'}}
-              </p>
-            </mat-card-content>
-          </mat-card>
-        </div>
-      </ng-container>
-      <mat-paginator
-        [length]="products.length"
-        [pageSize]="pageSize"
-        [pageSizeOptions]="[12, 24, 36]"
-        (page)="onPageChange($event)">
-      </mat-paginator>
-    </ng-container>
-
-    <ng-template #loading>
-      <p>Cargando productos...</p>
-    </ng-template>
-  </div>
+  } @else {
+    <div class="search-wrapper mb-2"  *ngIf="!isLoading">
+      <div class="input-group search-container">
+        <input type="text" [(ngModel)]="searchText" placeholder="Search..." class="form-control" (keyup)="onSearch()" />
+        <button (click)="onSearch()" class="btn btn-primary">
+          <mat-icon>search</mat-icon>
+        </button>
+      </div>
+    </div>
+    <div class="row">
+        <ng-container *ngIf="filterProducts.length > 0; else noProducts">
+          <ng-container *ngFor="let product of filterProducts.slice((currentPage - 1) * pageSize, currentPage * pageSize)">
+            <div class="col-sm-12 col-md-6 col-lg-3 mt-2">
+              <mat-card appearance="outlined" class= "product-card" (click)="detailClick(product)">
+                <mat-card-header>
+                  <mat-card-title> {{product.model}}</mat-card-title>
+                  <mat-card-subtitle>{{product.brand}}</mat-card-subtitle>
+                </mat-card-header>
+                <img class="image-card" mat-card-image src="{{product.imgUrl}}" alt="Phone {{product.model}}">
+                <mat-card-content>
+                  <p>
+                    {{product.price | currency: 'EUR'}}
+                  </p>
+                </mat-card-content>
+              </mat-card>
+            </div>
+          </ng-container>
+          <mat-paginator
+            [length]="filterProducts.length"
+            [pageSize]="pageSize"
+            [pageSizeOptions]="[12, 24, 36]"
+            (page)="onPageChange($event)">
+          </mat-paginator>
+        </ng-container>
+        <ng-template #noProducts>
+          <p>No hay productos disponibles.</p>
+        </ng-template>
+    </div>
+  }
 </div>

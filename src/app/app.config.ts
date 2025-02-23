@@ -6,12 +6,13 @@ import { provideEffects } from '@ngrx/effects';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { provideHttpClient } from '@angular/common/http';
 
+import { MatPaginatorIntl } from '@angular/material/paginator';
 
 import { routes } from './app.routes';
-import { productReducer } from './store/reducers/product.reducer';
 import { ProductEffects } from './store/effects/product.effects';
-import { MatPaginatorIntl } from '@angular/material/paginator';
+import { productReducer } from './store/reducers/product.reducer';
 import { CustomPaginatorIntl } from './config/custom-paginator-intl';
+
 export const appConfig: ApplicationConfig = {
   providers: [
     provideHttpClient(),

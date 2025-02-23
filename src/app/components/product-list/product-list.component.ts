@@ -3,11 +3,12 @@ import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { CommonModule, CurrencyPipe, NgFor, NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Observable } from 'rxjs';
+import { Observable, startWith } from 'rxjs';
 import { Store } from '@ngrx/store';
 
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { PageEvent } from '@angular/material/paginator';
 
@@ -21,14 +22,19 @@ import { clearCache, loadProducts } from '../../store/actions/product.actions';
 
 @Component({
   selector: 'app-product-list',
-  imports: [CommonModule, FormsModule,CurrencyPipe, MatCardModule, MatIconModule, MatPaginatorModule, NgIf, NgFor],
+  imports: [CommonModule, FormsModule,CurrencyPipe, MatCardModule, MatIconModule, MatPaginatorModule, MatProgressSpinnerModule, NgIf, NgFor],
   providers: [ProductService],
   templateUrl: './product-list.component.html',
   styleUrl: './product-list.component.scss'
 })
 export class ProductListComponent {
   private store = inject(Store);
-  products$: Observable<Product[]> = this.store.select(selectProducts);
+  products$: Observable<Product[]> = this.store.select(selectProducts).pipe(
+    startWith([])
+  );
+  originalProductList: Product[] = [];
+  isLoading = true;
+  filterProducts: Product[] = [];
 
   searchText: string = '';
   products: Product[]= [];
@@ -40,6 +46,14 @@ export class ProductListComponent {
 
   ngOnInit(): void {
     this.store.dispatch(loadProducts());
+
+    this.products$.subscribe(products => {
+      this.isLoading = products.length === 0; // Si aún no hay productos, sigue "cargando"
+      if(!this.isLoading){
+        this.filterProducts = products;
+        this.originalProductList = products;
+      }
+    });
   }
 
   refreshProducts(): void {
@@ -52,6 +66,17 @@ export class ProductListComponent {
   }
   onSearch() {
     console.log(this.searchText);
+    if(this.searchText.length>0){
+      this.filterProducts = this.originalProductList.filter((product) => {
+        if(product.brand.toLowerCase().includes(this.searchText.toLowerCase()) ||
+            product.model.toLowerCase().includes(this.searchText.toLowerCase())){
+          return true;
+        }
+        return false;
+      });
+    } else {
+      this.filterProducts = this.originalProductList;
+    }
   }
   detailClick(product: Product) {
     console.log(product);
