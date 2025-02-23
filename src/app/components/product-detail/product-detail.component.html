@@ -1,44 +1,55 @@
-<!-- Botón de volver -->
-<button mat-fab color="secondary" class="back-button" (click)="goBack()">
-  <mat-icon>arrow_back</mat-icon>
-</button>
-<!-- product-detail.component.html -->
-<div class="product-detail-container">
-  <!-- Sección de detalles del producto -->
+<div class="container mt-3">
+  <!-- Botón de volver -->
+  <button mat-icon-button class="back-button" (click)="goBack()">
+      <mat-icon>arrow_back</mat-icon>
+  </button>
   @if(product) {
-    <div class="product-info">
-      <img [src]="product.imgUrl" alt="{{ product.model }}" class="product-image" />
-      <h2>{{ product.model }}</h2>
-      <h3>{{ product.brand }}</h3>
-      <p class="price">{{ product.price | currency: 'EUR' }}</p>
-      <ul class="specs">
-        <li><strong>CPU:</strong> {{ product.cpu }}</li>
-        <li><strong>RAM:</strong> {{ product.ram }}</li>
-        <li><strong>Sistema Operativo:</strong> {{ product.os }}</li>
-        <li><strong>Resolución de pantalla:</strong> {{ product.displayResolution }}</li>
-        <li><strong>Batería:</strong> {{ product.battery }}</li>
-        <li><strong>Cámara Trasera:</strong> {{ primaryCamera }}</li>
-        <li><strong>Cámara Frontal:</strong> {{ product.secondaryCmera }}</li>
-        <li><strong>Dimensiones:</strong> {{ product.dimentions }}</li>
-        <li><strong>Peso:</strong> {{ product.weight }} g</li>
-      </ul>
-    </div>
+    <div class="product-detail-container">
+      <!-- Sección de imagen del producto -->
+      <div class="product-image">
+        <img [src]="product.imgUrl" alt="{{ product.model }}" class="product-img-large" />
+      </div>
 
-    <!-- Sección de acciones del producto -->
-    <div class="product-actions">
-      <label for="color">Color:</label>
-      <select id="color" [(ngModel)]="selectedColor">
-        <option *ngFor="let color of colorsOptions" [value]="color.code">{{ color.name }}</option>
-      </select>
+      <!-- Sección de detalles y acciones -->
+      <div class="product-info ms-3">
+        <h2 class="product-title">{{ product.model }}</h2>
+        <h4 class="product-subtitle">{{ product.brand }}</h4>
+        <h3 class="product-price">{{ product.price | currency: 'EUR' }}</h3>
 
-      <label for="storage">Almacenamiento:</label>
-      <select id="storage" [(ngModel)]="selectedStorage">
-        <option *ngFor="let storage of storageOptions" [value]="storage.code">{{ storage.name }}</option>
-      </select>
-      <button mat-flat-button color="primary" [disabled]="!selectedColor || !selectedStorage" (click)="addToCart()">
-        <mat-icon>shopping_cart</mat-icon>
-        Añadir a la cesta
-      </button>
+        <h5 class="specs-title">Especificaciones</h5>
+        <ul class="specs-list">
+            <li><strong>CPU:</strong> {{ product.cpu }}</li>
+            <li><strong>RAM:</strong> {{ product.ram }}</li>
+            <li><strong>Sistema Operativo:</strong> {{ product.os }}</li>
+            <li><strong>Resolución de pantalla:</strong> {{ product.displayResolution }}</li>
+            <li><strong>Batería:</strong> {{ product.battery }}</li>
+            <li><strong>Cámara Trasera:</strong> {{ product.primaryCamera }}</li>
+            <li><strong>Cámara Frontal:</strong> {{ product.secondaryCmera }}</li>
+            <li><strong>Dimensiones:</strong> {{ product.dimentions }}</li>
+            <li><strong>Peso:</strong> {{ product.weight }} g</li>
+        </ul>
+
+        <div class="product-actions">
+            <h4 class="actions-title">Seleccione el modelo</h4>
+            <div class="actions-container">
+                <div class="options">
+                    <label for="color">Color:</label>
+                    <select id="color" [(ngModel)]="selectedColor">
+                        <option *ngFor="let color of colorsOptions" [value]="color.code">{{ color.name }}</option>
+                    </select>
+
+                    <label for="storage">Almacenamiento:</label>
+                    <select id="storage" [(ngModel)]="selectedStorage">
+                        <option *ngFor="let storage of storageOptions" [value]="storage.code">{{ storage.name }}</option>
+                    </select>
+                </div>
+                <button mat-flat-button color="primary" [disabled]="!selectedColor || !selectedStorage" (click)="addToCart()" class="add-to-cart">
+                    <mat-icon>shopping_cart</mat-icon>
+                    Añadir a la cesta
+                </button>
+            </div>
+        </div>
+      </div>
     </div>
   }
 </div>
