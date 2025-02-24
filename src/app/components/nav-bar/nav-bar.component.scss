@@ -36,6 +36,10 @@
   display: flex;
   justify-content: center;
 }
+.breadcrumb-item.active {
+  color: rgb(255 255 255 / 75%);
+  font-size: medium;
+}
 
 .breadcrumb {
   background: none;
@@ -50,4 +54,5 @@
   content: '›';
   padding: 0 5px;
   color: #ffffff;
+  font-size: x-large;
 }
