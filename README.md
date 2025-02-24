@@ -87,6 +87,24 @@ ng test --code-coverage
 
 ---
 
+### 🔎 **Ejecutar Linter (Comprobación de Código)**
+Para analizar el código en busca de errores y mejoras de calidad:
+```sh
+npm run lint
+```
+o
+```sh
+ng lint
+```
+📌 **Esto revisará el código según las reglas de ESLint y sugerirá correcciones.**
+
+Si deseas corregir automáticamente algunos errores:
+```sh
+ng lint --fix
+```
+
+---
+
 ## 🛠️ **Tecnologías Utilizadas**
 - **Angular 19** (Framework principal)
 - **Angular Material** (Componentes UI)
