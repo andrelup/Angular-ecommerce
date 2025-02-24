@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CommonModule, CurrencyPipe } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
@@ -17,16 +17,16 @@ import { CartService } from '../../services/cart.service';
   templateUrl: './product-detail.component.html',
   styleUrl: './product-detail.component.scss'
 })
-export class ProductDetailComponent {
+export class ProductDetailComponent implements OnInit {
   private cartService = inject(CartService);
   readonly productService = inject(ProductService);
 
   product: ProductDetail | undefined;
-  selectedStorage: string = '';
-  selectedColor: string = '';
+  selectedStorage = '';
+  selectedColor = '';
   colorsOptions: SelectOption[] = [];
   storageOptions: SelectOption[] = [];
-  primaryCamera: any;
+  primaryCamera= '';
 
   constructor(readonly route: ActivatedRoute, readonly router: Router ) {}
 

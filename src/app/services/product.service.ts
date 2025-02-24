@@ -10,11 +10,7 @@ import { ProductDetail } from '../models/product-detail';
 })
 export class ProductService {
     private URI = 'https://itx-frontend-test.onrender.com';
-   private http = inject(HttpClient);
-
-    constructor() {
-
-    }
+    private http = inject(HttpClient);
 
     getProducts(): Observable<Product[]> {
         const urlProducts = new URL(this.URI+'/api/product');
@@ -24,7 +20,7 @@ export class ProductService {
         const urlProduct = new URL(this.URI+'/api/product/'+id);
         return this.http.get<ProductDetail>(urlProduct.toString());
     }
-    addToCart(product: any): Observable<any> {
+    addToCart(product: {id:string, colorCode: string, storageCode: string}): Observable<any> {
         const urlAddToCart = new URL(this.URI+'/api/cart');
         const body = {
             id: product.id,

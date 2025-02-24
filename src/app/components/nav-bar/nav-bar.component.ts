@@ -2,7 +2,6 @@ import { Component, inject, OnInit } from '@angular/core';
 
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
-import { MatChipsModule } from '@angular/material/chips';
 
 import { CartService } from '../../services/cart.service';
 import { NavigationEnd, Router } from '@angular/router';
@@ -19,8 +18,8 @@ export class NavBarComponent implements OnInit {
   private router = inject(Router);
   private cartService = inject(CartService);
 
-  cartItemCount: number = 0;
-  onDetailPage: boolean = false;
+  cartItemCount = 0;
+  onDetailPage = false;
 
   ngOnInit(): void {
     this.cartService.cartItemCount$.subscribe(count => {

@@ -1,4 +1,3 @@
-import { Config } from './../../node_modules/cosmiconfig/dist/types.d';
 import { ApplicationConfig, importProvidersFrom, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { provideStore } from '@ngrx/store';

@@ -1,5 +1,5 @@
 
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CommonModule, CurrencyPipe, NgFor, NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -27,7 +27,7 @@ import { clearCache, loadProducts } from '../../store/actions/product.actions';
   templateUrl: './product-list.component.html',
   styleUrl: './product-list.component.scss'
 })
-export class ProductListComponent {
+export class ProductListComponent implements OnInit {
   private store = inject(Store);
   products$: Observable<Product[]> = this.store.select(selectProducts).pipe(
     startWith([])
@@ -36,7 +36,7 @@ export class ProductListComponent {
   isLoading = true;
   filterProducts: Product[] = [];
 
-  searchText: string = '';
+  searchText = '';
   products: Product[]= [];
   currentPage = 1;
   pageSize = 12;
