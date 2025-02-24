@@ -82,11 +82,5 @@ export class ProductListComponent implements OnInit {
     console.log(product);
     this.router.navigate(['/detail/', product.id]);
   }
-  addToCart(product: Product) {
-    console.log(product);
-    this.productService.addToCart(product).subscribe((data) => {
-      console.log(data);
-    });
-  }
 
 }
